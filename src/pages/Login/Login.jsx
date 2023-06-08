@@ -9,9 +9,12 @@ import {
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState("");
+  const { loginUser } = useAuth();
 
   const {
     register,
@@ -36,7 +39,14 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    loginUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -44,7 +54,7 @@ const Login = () => {
       <Helmet>
         <title>SportsInSun-login</title>
       </Helmet>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200 pt-20">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center w-3/4 lg:text-left">
             <h1 className="text-5xl text-center mb-4 font-bold">Login now!</h1>
@@ -107,6 +117,7 @@ const Login = () => {
                     type="submit"
                     value="Login"
                   />
+                  {error && <span className="text-red-500 mt-2">{error}</span>}
                 </div>
                 <p className="">
                   Don`t have an Account? Go to{" "}

@@ -2,19 +2,30 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const Register = () => {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm();
+  const { createUser } = useAuth();
 
   const password = watch("password");
 
   const onSubmit = (data) => {
-    console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -22,7 +33,7 @@ const Register = () => {
       <Helmet>
         <title>SportsInSun-register</title>
       </Helmet>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200 pt-20">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left w-1/2">
             <h1 className="text-5xl text-center mb-4 font-bold">
@@ -215,6 +226,7 @@ const Register = () => {
                     type="submit"
                     value="Register"
                   />
+                  {error && <span className="text-red-500 mt-2">{error}</span>}
                 </div>
                 <p className="py-3">
                   Already registered? Go to{" "}
