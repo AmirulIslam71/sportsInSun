@@ -7,7 +7,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 
@@ -15,6 +15,9 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState("");
   const { loginUser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -43,6 +46,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error.message);

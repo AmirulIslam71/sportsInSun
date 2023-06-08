@@ -4,6 +4,8 @@ import ErrorPage from "../shared/ErrorPage/ErrorPage";
 import Home from "../pages/HomePages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import DashboardMenu from "../pages/Dashboard/DashboardMenu/DashboardMenu";
+import PrivateRoutes from "../providers/PrivateRoutes";
 
 const Router = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const Router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardMenu></DashboardMenu>
+      </PrivateRoutes>
+    ),
   },
 ]);
 export default Router;

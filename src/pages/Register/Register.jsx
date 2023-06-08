@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
@@ -14,6 +14,7 @@ const Register = () => {
     watch,
   } = useForm();
   const { createUser } = useAuth();
+  const navigate = useNavigate();
 
   const password = watch("password");
 
@@ -22,6 +23,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((error) => {
         setError(error.message);

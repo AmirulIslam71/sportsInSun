@@ -1,6 +1,17 @@
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const option = (
     <>
       <li>
@@ -53,30 +64,6 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/login"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "green" : "",
-            };
-          }}
-        >
-          Login
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "green" : "",
-            };
-          }}
-        >
-          <button>LogOut</button>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="/register"
           style={({ isActive }) => {
             return {
@@ -87,6 +74,25 @@ const Navbar = () => {
           Register
         </NavLink>
       </li>
+      {user ? (
+        <li>
+          <button onClick={handleLogOut}>Log Out</button>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/login"
+            style={({ isActive, isPending }) => {
+              return {
+                fontWeight: isActive ? "bold" : "",
+                color: isPending ? "red" : "white",
+              };
+            }}
+          >
+            Log In
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -125,12 +131,30 @@ const Navbar = () => {
           />
         </button>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex ">
         <ul className="menu menu-horizontal px-1 text-xl text-white">
           {option}
         </ul>
       </div>
-      <div className="navbar-end">
+      {user && (
+        <div
+          className="tooltip tooltip-bottom ml-2"
+          data-tip={user?.displayName}
+        >
+          <div className="avatar online h-12 w-12 items-center">
+            <div className=" rounded-full">
+              <img
+                src={
+                  user?.photoURL
+                    ? user?.photoURL
+                    : "https://i.ibb.co/wSkvRbb/pngtree-user-vector-avatar-png-image-1541962.jpg"
+                }
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="ml-8">
         <button>Dark</button>
       </div>
     </div>
