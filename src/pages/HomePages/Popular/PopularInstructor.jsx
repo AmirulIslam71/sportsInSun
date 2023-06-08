@@ -1,7 +1,12 @@
+import SectionTitle from "../../../components/SectionTitle";
+
 const PopularInstructor = () => {
   return (
     <div>
-      <h1>Popular instructor</h1>
+      <SectionTitle
+        heading={"Train with Experts"}
+        subHeading={"Our popular team"}
+      ></SectionTitle>
     </div>
   );
 };

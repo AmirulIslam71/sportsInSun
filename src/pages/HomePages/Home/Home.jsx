@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet-async";
+import AdsSection from "../AdsSection/AdsSection";
 import Banner from "../Banner/Banner";
 import Popular from "../Popular/Popular";
 import PopularInstructor from "../Popular/PopularInstructor";
@@ -5,9 +7,13 @@ import PopularInstructor from "../Popular/PopularInstructor";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>SportInSun-Home</title>
+      </Helmet>
       <Banner></Banner>
       <Popular></Popular>
       <PopularInstructor></PopularInstructor>
+      <AdsSection></AdsSection>
     </div>
   );
 };
