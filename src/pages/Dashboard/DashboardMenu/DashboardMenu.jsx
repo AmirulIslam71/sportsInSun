@@ -7,6 +7,8 @@ import {
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashboardMenu = () => {
+  const isAdmin = true;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -29,55 +31,64 @@ const DashboardMenu = () => {
         </h2>
         <ul className="menu p-2 w-60 h-full uppercase mt-4">
           {/* Sidebar content here */}
+          {isAdmin && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/adminHome"
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "green" : "",
+                    };
+                  }}
+                >
+                  <FaHome></FaHome>admin home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allUsers"
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "green" : "",
+                    };
+                  }}
+                >
+                  <FaUserAlt></FaUserAlt> all users
+                </NavLink>
+              </li>
+            </>
+          )}
+          {!isAdmin && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/studentHome"
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "green" : "",
+                    };
+                  }}
+                >
+                  <FaHome></FaHome>student home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/instructorHome"
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "green" : "",
+                    };
+                  }}
+                >
+                  <FaHome></FaHome>instructor home
+                </NavLink>
+              </li>
+            </>
+          )}
 
-          <li>
-            <NavLink
-              to="/dashboard/adminHome"
-              style={({ isActive }) => {
-                return {
-                  color: isActive ? "green" : "",
-                };
-              }}
-            >
-              <FaHome></FaHome>admin home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/allUsers"
-              style={({ isActive }) => {
-                return {
-                  color: isActive ? "green" : "",
-                };
-              }}
-            >
-              <FaUserAlt></FaUserAlt> all users
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/studentHome"
-              style={({ isActive }) => {
-                return {
-                  color: isActive ? "green" : "",
-                };
-              }}
-            >
-              <FaHome></FaHome>student home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/instructorHome"
-              style={({ isActive }) => {
-                return {
-                  color: isActive ? "green" : "",
-                };
-              }}
-            >
-              <FaHome></FaHome>instructor home
-            </NavLink>
-          </li>
+          {/* main nav bar start  */}
           <div className="w-10/12 mx-auto my-10">
             <hr />
           </div>
