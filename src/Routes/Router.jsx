@@ -8,6 +8,10 @@ import DashboardMenu from "../pages/Dashboard/DashboardMenu/DashboardMenu";
 import PrivateRoutes from "../providers/PrivateRoutes";
 import Instructor from "../pages/Instructor/Instructor";
 import Classes from "../pages/Classes/Classes";
+import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome";
+import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome";
+import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
+import AllUsers from "../pages/Dashboard/AdminDashboard/AllUsers";
 
 const Router = createBrowserRouter([
   {
@@ -44,6 +48,24 @@ const Router = createBrowserRouter([
         <DashboardMenu></DashboardMenu>
       </PrivateRoutes>
     ),
+    children: [
+      {
+        path: "studentHome",
+        element: <StudentHome></StudentHome>,
+      },
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "instructorHome",
+        element: <InstructorHome></InstructorHome>,
+      },
+    ],
   },
 ]);
 export default Router;

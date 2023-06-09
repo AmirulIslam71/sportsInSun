@@ -1,4 +1,9 @@
-import { FaHome, FaPeopleArrows, FaPeopleCarry } from "react-icons/fa";
+import {
+  FaHome,
+  FaPeopleArrows,
+  FaPeopleCarry,
+  FaUserAlt,
+} from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashboardMenu = () => {
@@ -22,7 +27,7 @@ const DashboardMenu = () => {
           <span className="text-black">in</span> S
           <span className="text-orange-400 text-3xl">un</span>
         </h2>
-        <ul className="menu p-2 w-60 h-full uppercase">
+        <ul className="menu p-2 w-60 h-full uppercase mt-4">
           {/* Sidebar content here */}
 
           <li>
@@ -30,7 +35,7 @@ const DashboardMenu = () => {
               to="/dashboard/adminHome"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >
@@ -39,10 +44,22 @@ const DashboardMenu = () => {
           </li>
           <li>
             <NavLink
+              to="/dashboard/allUsers"
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "green" : "",
+                };
+              }}
+            >
+              <FaUserAlt></FaUserAlt> all users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard/studentHome"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >
@@ -54,7 +71,7 @@ const DashboardMenu = () => {
               to="/dashboard/instructorHome"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >
@@ -69,7 +86,7 @@ const DashboardMenu = () => {
               to="/"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >
@@ -81,7 +98,7 @@ const DashboardMenu = () => {
               to="/instructor"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >
@@ -93,7 +110,7 @@ const DashboardMenu = () => {
               to="/classes"
               style={({ isActive }) => {
                 return {
-                  color: isActive ? "white" : "",
+                  color: isActive ? "green" : "",
                 };
               }}
             >

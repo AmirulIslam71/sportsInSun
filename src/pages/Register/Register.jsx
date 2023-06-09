@@ -1,9 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -15,31 +17,43 @@ const Register = () => {
     reset,
   } = useForm();
   const { createUser, updateUserProfile } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const password = watch("password");
 
   const onSubmit = (data) => {
     console.log(data);
     const name = data.name;
+    const email = data.email;
+    const password = data.password;
     const photo = data.photo;
-    // const gender = data.gender;
-    // const phone = data.phone;
-    // const address = data.address;
+    const gender = data.gender;
+    const phone = data.phone;
+    const address = data.address;
 
-    createUser(data.email, data.password)
+    createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        const saveUser = { name, email, photo, gender, phone, address };
         updateUserProfile(name, photo)
           .then(() => {
-            console.log("update profile");
-            reset();
+            axios.post("http://localhost:5000/users", saveUser).then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User Create successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                reset();
+              }
+            });
           })
           .catch((error) => {
             console.log(error);
           });
-        navigate("/");
       })
       .catch((error) => {
         setError(error.message);
@@ -207,8 +221,8 @@ const Register = () => {
                       type="number"
                       {...register("phone", {
                         required: true,
-                        minLength: 11,
-                        maxLength: 11,
+                        minLength: 10,
+                        maxLength: 13,
                       })}
                       placeholder="Enter phone number"
                       className="input input-bordered"
@@ -216,6 +230,16 @@ const Register = () => {
                     {errors.phone && (
                       <span className="text-red-500">
                         Phone number is required
+                      </span>
+                    )}
+                    {errors.phone?.type === "minLength" && (
+                      <span className="text-red-500">
+                        phone number must be 10 digits
+                      </span>
+                    )}
+                    {errors.phone?.type === "maxLength" && (
+                      <span className="text-red-500">
+                        phone number must be 13 digits
                       </span>
                     )}
                   </div>

@@ -26,18 +26,22 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "green" : "",
-            };
-          }}
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user ? (
+        <li>
+          <NavLink
+            to="/dashboard/studentHome"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "green" : "",
+              };
+            }}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
       <li>
         <NavLink
           to="/instructor"
@@ -62,18 +66,22 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/register"
-          style={({ isActive }) => {
-            return {
-              color: isActive ? "green" : "",
-            };
-          }}
-        >
-          Register
-        </NavLink>
-      </li>
+      {user ? (
+        ""
+      ) : (
+        <li>
+          <NavLink
+            to="/register"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "green" : "",
+              };
+            }}
+          >
+            Register
+          </NavLink>
+        </li>
+      )}
       {user ? (
         <li>
           <button onClick={handleLogOut}>Log Out</button>
@@ -118,7 +126,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-white"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow  rounded-box w-52 text-white"
           >
             {option}
           </ul>
