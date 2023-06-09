@@ -31,14 +31,14 @@ const Instructor = () => {
           </div>
         </div>
       </Parallax>
-      <div className="bg-black py-8 px-2">
+      <div className="bg-gradient-to-r from-black to-red-950 py-8 px-2">
         <h5 className="text-orange-600 text-2xl uppercase">Our Team</h5>
         <h2 className="text-white text-5xl uppercase">Train with Experts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
           {instructors.map((instructor) => (
             <div
               key={instructor._id}
-              className="card card-compact w-96 bg-base-100 shadow-xl"
+              className="card card-compact w-96 text-white shadow-xl mb-6"
             >
               <figure>
                 <img
@@ -47,8 +47,11 @@ const Instructor = () => {
                   alt="Shoes"
                 />
               </figure>
-              <div className="card-body ">
-                <h2 className="card-title">{instructor.name}</h2>
+              <div className="card-body bg-slate-700 ">
+                <h2 className="card-title">
+                  <span className="font-bold">Instructor :</span>{" "}
+                  {instructor.name}
+                </h2>
                 <div className="space-y-2 text-lg">
                   <p>
                     <span className="font-semibold">Email :</span>{" "}
