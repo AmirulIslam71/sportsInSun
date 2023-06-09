@@ -35,20 +35,18 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const updateUserProfile = (name, photo, gender, phone, address) => {
+  const updateUserProfile = (name, photo) => {
     setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
-      phoneNumber: phone,
-      gender: gender,
-      address: address,
     });
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currenUser) => {
       setUser(currenUser);
+      console.log("hello", currenUser);
       setLoading(false);
     });
     return () => {

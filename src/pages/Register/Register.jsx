@@ -12,17 +12,33 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   const password = watch("password");
 
   const onSubmit = (data) => {
+    console.log(data);
+    const name = data.name;
+    const photo = data.photo;
+    // const gender = data.gender;
+    // const phone = data.phone;
+    // const address = data.address;
+
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        updateUserProfile(name, photo)
+          .then(() => {
+            console.log("update profile");
+            reset();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         navigate("/");
       })
       .catch((error) => {

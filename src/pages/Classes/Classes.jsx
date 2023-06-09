@@ -1,8 +1,17 @@
 import { Parallax } from "react-parallax";
 import SectionTitle from "../../components/SectionTitle";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Classes = () => {
+  const [selectedClassId, setSelectedClassId] = useState(null);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -10,7 +19,42 @@ const Classes = () => {
       return res.json();
     },
   });
-  console.log(classes);
+
+  const handleSelected = (singleClass) => {
+    if (user) {
+      axios
+        .post("http://localhost:5000/selectedClass", singleClass)
+        .then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Class has been selected",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setSelectedClassId(singleClass._id);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be selected class. Please login",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login Now",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div>
@@ -79,8 +123,16 @@ const Classes = () => {
                   </p>
                 </div>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">
-                    See Classes Details
+                  <button
+                    onClick={() => handleSelected(singleClass)}
+                    className={`btn btn-primary ${
+                      selectedClassId === singleClass._id ? "disabled" : ""
+                    }`}
+                    disabled={selectedClassId === singleClass._id}
+                  >
+                    {selectedClassId === singleClass._id
+                      ? "Class Selected"
+                      : "Select Class"}
                   </button>
                 </div>
               </div>
