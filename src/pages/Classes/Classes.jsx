@@ -5,11 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import useSelect from "../../hooks/useSelect";
 
 const Classes = () => {
-  const [selectedClassId, setSelectedClassId] = useState(null);
+  const [selectedClassId, setSelectedClassId] = useState([]);
+  const [, refetch] = useSelect();
   const { user } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const { data: classes = [] } = useQuery({
@@ -20,12 +24,38 @@ const Classes = () => {
     },
   });
 
-  const handleSelected = (singleClass) => {
+  useEffect(() => {
     if (user) {
       axios
-        .post("http://localhost:5000/selectedClass", singleClass)
+        .get("http://localhost:5000/selectedClass", {
+          params: { email: user.email },
+        })
+        .then((res) => {
+          const selectedClasses = res.data.map((item) => item.classId);
+          setSelectedClassId(selectedClasses);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
+
+  const handleSelected = (singleClass) => {
+    if (user) {
+      const saveClass = {
+        classId: singleClass,
+        email: user.email,
+        name: singleClass.name,
+        availableSeats: singleClass.availableSeats,
+        price: singleClass.price,
+        image: singleClass.image,
+        instructorName: singleClass.instructorName,
+      };
+      axios
+        .post("http://localhost:5000/selectedClass", saveClass)
         .then((res) => {
           if (res.data.insertedId) {
+            refetch();
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -33,7 +63,7 @@ const Classes = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-            setSelectedClassId(singleClass._id);
+            setSelectedClassId((prevIds) => [...prevIds, singleClass._id]);
           }
         })
         .catch((error) => {
@@ -50,7 +80,7 @@ const Classes = () => {
         confirmButtonText: "Login Now",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
+          navigate("/login", { state: { from: location } });
         }
       });
     }
@@ -126,11 +156,13 @@ const Classes = () => {
                   <button
                     onClick={() => handleSelected(singleClass)}
                     className={`btn btn-primary ${
-                      selectedClassId === singleClass._id ? "disabled" : ""
+                      selectedClassId.includes(singleClass._id)
+                        ? "disabled"
+                        : ""
                     }`}
-                    disabled={selectedClassId === singleClass._id}
+                    disabled={selectedClassId.includes(singleClass._id)}
                   >
-                    {selectedClassId === singleClass._id
+                    {selectedClassId.includes(singleClass._id)
                       ? "Class Selected"
                       : "Select Class"}
                   </button>

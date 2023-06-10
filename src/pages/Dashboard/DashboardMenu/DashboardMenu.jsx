@@ -1,13 +1,18 @@
 import {
+  FaBookmark,
   FaHome,
   FaPeopleArrows,
   FaPeopleCarry,
   FaUserAlt,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useSelect from "../../../hooks/useSelect";
 
 const DashboardMenu = () => {
-  const isAdmin = true;
+  const [selectedClass] = useSelect();
+  const isAdmin = false;
+  const isInstructor = false;
+  const isStudent = true;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -31,7 +36,7 @@ const DashboardMenu = () => {
         </h2>
         <ul className="menu p-2 w-60 h-full uppercase mt-4">
           {/* Sidebar content here */}
-          {isAdmin && (
+          {(isAdmin && (
             <>
               <li>
                 <NavLink
@@ -58,35 +63,54 @@ const DashboardMenu = () => {
                 </NavLink>
               </li>
             </>
-          )}
-          {!isAdmin && (
-            <>
-              <li>
-                <NavLink
-                  to="/dashboard/studentHome"
-                  style={({ isActive }) => {
-                    return {
-                      color: isActive ? "green" : "",
-                    };
-                  }}
-                >
-                  <FaHome></FaHome>student home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/instructorHome"
-                  style={({ isActive }) => {
-                    return {
-                      color: isActive ? "green" : "",
-                    };
-                  }}
-                >
-                  <FaHome></FaHome>instructor home
-                </NavLink>
-              </li>
-            </>
-          )}
+          )) ||
+            (isInstructor && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/instructorHome"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaHome></FaHome>instructor home
+                  </NavLink>
+                </li>
+              </>
+            )) ||
+            (isStudent && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/studentHome"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaHome></FaHome>student home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/selectClass"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaBookmark></FaBookmark> Select Classes
+                    <div className="badge badge-secondary space-x-0">
+                      {selectedClass.length}
+                    </div>
+                  </NavLink>
+                </li>
+              </>
+            ))}
 
           {/* main nav bar start  */}
           <div className="w-10/12 mx-auto my-10">

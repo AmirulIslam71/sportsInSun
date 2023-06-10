@@ -12,6 +12,7 @@ import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome";
 import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import AllUsers from "../pages/Dashboard/AdminDashboard/AllUsers";
+import SelectClasses from "../pages/Dashboard/StudentDashboard/SelectClasses";
 
 const Router = createBrowserRouter([
   {
@@ -49,10 +50,16 @@ const Router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+      // student dashboard
       {
         path: "studentHome",
         element: <StudentHome></StudentHome>,
       },
+      {
+        path: "selectClass",
+        element: <SelectClasses></SelectClasses>,
+      },
+      // admin dashboard
       {
         path: "adminHome",
         element: <AdminHome></AdminHome>,
@@ -61,6 +68,7 @@ const Router = createBrowserRouter([
         path: "allUsers",
         element: <AllUsers></AllUsers>,
       },
+      // instructor dashboard
       {
         path: "instructorHome",
         element: <InstructorHome></InstructorHome>,

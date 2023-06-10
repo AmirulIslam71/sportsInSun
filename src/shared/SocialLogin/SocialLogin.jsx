@@ -2,11 +2,13 @@ import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const { googleSignIn, updateUserProfile } = useAuth();
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
+
   const from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignIn = () => {
@@ -26,13 +28,20 @@ const SocialLogin = () => {
             };
             axios.post("http://localhost:5000/users", saveUser).then((res) => {
               if (res.data.insertedId) {
-                navigate(from, { replace: true });
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User Create with social site successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
               }
             });
           })
           .catch((error) => {
             console.log(error);
           });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);

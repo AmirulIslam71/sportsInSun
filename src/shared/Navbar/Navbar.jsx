@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useSelect from "../../hooks/useSelect";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [selectedClass] = useSelect();
 
   const handleLogOut = () => {
     logOut()
@@ -66,6 +68,23 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard/selectClass"
+            style={({ isActive }) => {
+              return {
+                color: isActive ? "green" : "",
+              };
+            }}
+          >
+            Selected
+            <div className="badge badge-secondary space-x-0">
+              {selectedClass.length}
+            </div>
+          </NavLink>
+        </li>
+      )}
       {user ? (
         ""
       ) : (

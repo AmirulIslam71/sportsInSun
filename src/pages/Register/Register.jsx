@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
@@ -9,6 +9,10 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -47,6 +51,7 @@ const Register = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
+                navigate(from, { replace: true });
                 reset();
               }
             });
