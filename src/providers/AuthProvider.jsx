@@ -49,13 +49,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
           .then((res) => {
             localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
           });
-      } else localStorage.removeItem("access-token");
-
-      setLoading(false);
+      } else {
+        localStorage.removeItem("access-token");
+      }
     });
     return () => {
       return unsubscribe;
@@ -63,7 +64,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
-    setLoading(true);
+    // setLoading(true);
     return signOut(auth);
   };
 

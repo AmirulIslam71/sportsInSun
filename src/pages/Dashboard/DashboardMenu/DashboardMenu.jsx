@@ -7,12 +7,13 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useSelect from "../../../hooks/useSelect";
+import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
 
 const DashboardMenu = () => {
   const [selectedClass] = useSelect();
-  const isAdmin = false;
-  const isInstructor = false;
-  const isStudent = true;
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   return (
     <div className="drawer lg:drawer-open">
@@ -79,8 +80,7 @@ const DashboardMenu = () => {
                   </NavLink>
                 </li>
               </>
-            )) ||
-            (isStudent && (
+            )) || (
               <>
                 <li>
                   <NavLink
@@ -110,7 +110,7 @@ const DashboardMenu = () => {
                   </NavLink>
                 </li>
               </>
-            ))}
+            )}
 
           {/* main nav bar start  */}
           <div className="w-10/12 mx-auto my-10">

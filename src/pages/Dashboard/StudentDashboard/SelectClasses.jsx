@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const SelectClasses = () => {
   const [selectedClass, refetch] = useSelect();
-  const totalPrice = selectedClass.reduce((sum, item) => item.price + sum, 0);
+  //   const totalPrice = selectedClass.reduce((sum, item) => item.price + sum, 0);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -41,7 +41,7 @@ const SelectClasses = () => {
       <div className="overflow-x-auto bg-white p-2 mt-6">
         <div className="flex justify-between py-4 items-center">
           <h1 className="text-2xl ">Select Classes : {selectedClass.length}</h1>
-          <h1 className="text-2xl">Total Price: ${totalPrice}</h1>
+          {/* <h1 className="text-2xl">Total Price: ${totalPrice}</h1> */}
         </div>
         <table className="table">
           <thead className="bg-amber-700 text-white text-lg">

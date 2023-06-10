@@ -1,10 +1,14 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useSelect from "../../hooks/useSelect";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [selectedClass] = useSelect();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   const handleLogOut = () => {
     logOut()
@@ -31,7 +35,11 @@ const Navbar = () => {
       {user ? (
         <li>
           <NavLink
-            to="/dashboard/studentHome"
+            to={
+              (isAdmin && "/dashboard/adminHome") ||
+              (isInstructor && "/dashboard/instructorHome") ||
+              "/dashboard/studentHome"
+            }
             style={({ isActive }) => {
               return {
                 color: isActive ? "green" : "",
@@ -68,7 +76,7 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
-      {user && (
+      {user && !isAdmin && !isInstructor && (
         <li>
           <NavLink
             to="/dashboard/selectClass"
