@@ -138,6 +138,15 @@ const Classes = () => {
                 <div className="space-y-2 text-lg">
                   <p>
                     <span className="font-semibold text-lime-400">
+                      Enrolled Student :
+                    </span>{" "}
+                    <span className="text-red-400 font-semibold">
+                      {" "}
+                      {singleClass.enrolled}
+                    </span>
+                  </p>
+                  <p>
+                    <span className="font-semibold text-lime-400">
                       Available Seats :
                     </span>{" "}
                     <span className="text-red-400 font-semibold">

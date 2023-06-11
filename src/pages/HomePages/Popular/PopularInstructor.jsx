@@ -1,12 +1,75 @@
+import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../components/SectionTitle";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const PopularInstructor = () => {
+  const { data: instructors = [] } = useQuery({
+    queryKey: ["instructors"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/instructors/popular");
+      return res.data;
+    },
+  });
+
   return (
     <div>
       <SectionTitle
         heading={"Train with Experts"}
         subHeading={"Our popular team"}
       ></SectionTitle>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+        {instructors.map((instructor) => (
+          <div
+            key={instructor._id}
+            className="card card-compact w-96 text-white shadow-xl mb-6"
+          >
+            <figure>
+              <img src={instructor.image} className="w-full h-80" alt="Shoes" />
+            </figure>
+            <div className="card-body bg-slate-700 ">
+              <h2 className="card-title">
+                <span className="font-bold">Instructor :</span>{" "}
+                {instructor.name}
+              </h2>
+              <div className="space-y-2 text-lg">
+                <p>
+                  <span className="font-semibold">Email :</span>{" "}
+                  {instructor.email}
+                </p>
+                <p>
+                  <span className="font-semibold">Student :</span>{" "}
+                  <span className="text-red-400 font-semibold">
+                    {instructor.student}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-semibold">Number of Classes :</span>{" "}
+                  <span className="text-red-400 font-semibold">
+                    {instructor.numClassesTaken}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-semibold">Name of Classes -</span>{" "}
+                  {instructor.classesTaken.map((classes, index) => (
+                    <li key={index} className="">
+                      {classes}
+                    </li>
+                  ))}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="text-center mb-5">
+        <Link to="/instructor">
+          <button className="bg-emerald-600 text-white uppercase text-center p-2 rounded">
+            See All instructors
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

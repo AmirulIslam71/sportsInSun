@@ -9,7 +9,6 @@ const Instructor = () => {
       return res.json();
     },
   });
-  console.log(instructors);
 
   return (
     <div>
@@ -56,6 +55,12 @@ const Instructor = () => {
                   <p>
                     <span className="font-semibold">Email :</span>{" "}
                     {instructor.email}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Student :</span>{" "}
+                    <span className="text-red-400 font-semibold">
+                      {instructor.student}
+                    </span>
                   </p>
                   <p>
                     <span className="font-semibold">Number of Classes :</span>{" "}
