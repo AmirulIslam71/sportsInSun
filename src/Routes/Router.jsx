@@ -15,6 +15,8 @@ import AllUsers from "../pages/Dashboard/AdminDashboard/AllUsers";
 import SelectClasses from "../pages/Dashboard/StudentDashboard/SelectClasses";
 import AdminRoutes from "./AdmineRoutes";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
+import Payment from "../pages/Dashboard/StudentDashboard/Payment";
+import MyClass from "../pages/Dashboard/InstructorDashboard/MyClass";
 
 const Router = createBrowserRouter([
   {
@@ -61,6 +63,10 @@ const Router = createBrowserRouter([
         path: "selectClass",
         element: <SelectClasses></SelectClasses>,
       },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
 
       // admin dashboard
       {
@@ -83,6 +89,10 @@ const Router = createBrowserRouter([
       {
         path: "addClass",
         element: <AddClass></AddClass>,
+      },
+      {
+        path: "myClass",
+        element: <MyClass></MyClass>,
       },
     ],
   },

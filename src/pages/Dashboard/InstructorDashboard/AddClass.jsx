@@ -10,7 +10,7 @@ const AddClass = () => {
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const imageHostingUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostingToken}`;
+  const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageHostingToken}`;
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -35,7 +35,7 @@ const AddClass = () => {
             status: "pending",
             enrolled: 0,
           };
-          console.log(newClass);
+
           axiosSecure.post("/classes", newClass).then((data) => {
             console.log(data);
             if (data.data.insertedId) {
@@ -43,7 +43,7 @@ const AddClass = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Your work has been saved",
+                title: "Class Added successfully",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -122,8 +122,12 @@ const AddClass = () => {
           className="file-input file-input-bordered w-full max-w-xs"
         />
         <br />
-        <div className="btn bg-pink-800 text-white mt-4">
-          <input type="submit" value="Add Class" />
+        <div className=" ">
+          <input
+            type="submit"
+            value="Add Class"
+            className="bg-pink-800 text-white mt-4 btn"
+          />
         </div>
       </form>
     </div>

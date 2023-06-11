@@ -1,5 +1,8 @@
 import {
+  FaBook,
+  FaBookOpen,
   FaBookmark,
+  FaGoogleWallet,
   FaHome,
   FaPeopleArrows,
   FaPeopleCarry,
@@ -88,7 +91,19 @@ const DashboardMenu = () => {
                       };
                     }}
                   >
-                    <FaHome></FaHome>Add Class
+                    <FaBookOpen></FaBookOpen> Add Class
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/MyClass"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaBook></FaBook>My Class
                   </NavLink>
                 </li>
               </>
@@ -119,6 +134,18 @@ const DashboardMenu = () => {
                     <div className="badge badge-secondary space-x-0">
                       {selectedClass.length}
                     </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/payment"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaGoogleWallet></FaGoogleWallet> Payment
                   </NavLink>
                 </li>
               </>
