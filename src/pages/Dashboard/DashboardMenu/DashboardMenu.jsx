@@ -79,6 +79,18 @@ const DashboardMenu = () => {
                     <FaHome></FaHome>instructor home
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/addClass"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaHome></FaHome>Add Class
+                  </NavLink>
+                </li>
               </>
             )) || (
               <>

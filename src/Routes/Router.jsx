@@ -13,6 +13,8 @@ import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import AllUsers from "../pages/Dashboard/AdminDashboard/AllUsers";
 import SelectClasses from "../pages/Dashboard/StudentDashboard/SelectClasses";
+import AdminRoutes from "./AdmineRoutes";
+import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
 
 const Router = createBrowserRouter([
   {
@@ -59,6 +61,7 @@ const Router = createBrowserRouter([
         path: "selectClass",
         element: <SelectClasses></SelectClasses>,
       },
+
       // admin dashboard
       {
         path: "adminHome",
@@ -66,12 +69,20 @@ const Router = createBrowserRouter([
       },
       {
         path: "allUsers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>
+        ),
       },
       // instructor dashboard
       {
         path: "instructorHome",
         element: <InstructorHome></InstructorHome>,
+      },
+      {
+        path: "addClass",
+        element: <AddClass></AddClass>,
       },
     ],
   },
