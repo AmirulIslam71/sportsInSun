@@ -66,6 +66,18 @@ const DashboardMenu = () => {
                   <FaUserAlt></FaUserAlt> all users
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allClasses"
+                  style={({ isActive }) => {
+                    return {
+                      color: isActive ? "green" : "",
+                    };
+                  }}
+                >
+                  <FaUserAlt></FaUserAlt> All Classes
+                </NavLink>
+              </li>
             </>
           )) ||
             (isInstructor && (

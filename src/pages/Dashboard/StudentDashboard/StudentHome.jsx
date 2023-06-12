@@ -1,7 +1,10 @@
+import useAuth from "../../../hooks/useAuth";
+
 const StudentHome = () => {
+  const { user } = useAuth();
   return (
-    <div>
-      <h1>student home pages</h1>
+    <div className="w-full h-full p-2">
+      <h1>HI ,Welcome there,{user?.displayName}</h1>
     </div>
   );
 };

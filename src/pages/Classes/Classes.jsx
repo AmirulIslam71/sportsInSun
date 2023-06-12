@@ -1,28 +1,21 @@
 import { Parallax } from "react-parallax";
 import SectionTitle from "../../components/SectionTitle";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useSelect from "../../hooks/useSelect";
+import useClasses from "../../hooks/useClasses";
 
 const Classes = () => {
   const [selectedClassId, setSelectedClassId] = useState([]);
+  const [classes] = useClasses();
   const [, refetch] = useSelect();
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const { data: classes = [] } = useQuery({
-    queryKey: ["classes"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/classes");
-      return res.json();
-    },
-  });
 
   useEffect(() => {
     if (user) {

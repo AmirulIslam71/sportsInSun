@@ -3,50 +3,34 @@ import useMyClass from "../../../hooks/useMyClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const imageHostingToken = import.meta.env.VITE_Hosting_Token;
-
 const UpdateModal = ({ updateClass }) => {
   const { register, handleSubmit } = useForm();
-  const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageHostingToken}`;
+
   const [axiosSecure] = useAxiosSecure();
 
   const [, refetch] = useMyClass();
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
+    const { name, seats, price } = data;
+    const updatedClass = {
+      name,
+      availableSeats: parseInt(seats),
+      price: parseFloat(price),
+    };
 
-    fetch(imageHostingUrl, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageResponse) => {
-        if (imageResponse.success) {
-          const imageUrl = imageResponse.data.display_url;
-          const { name, seats, price } = data;
-          const updatedClass = {
-            name,
-            availableSeats: parseInt(seats),
-            price: parseFloat(price),
-            image: imageUrl,
-          };
-
-          axiosSecure
-            .put(`/classes/${updateClass._id}`, updatedClass)
-            .then((data) => {
-              console.log(data);
-              if (data.data.modifiedCount) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Class Updated successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                refetch();
-              }
-            });
+    axiosSecure
+      .put(`/classes/${updateClass._id}`, updatedClass)
+      .then((data) => {
+        console.log(data);
+        if (data.data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Class Updated successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
         }
       });
   };
@@ -67,7 +51,7 @@ const UpdateModal = ({ updateClass }) => {
             <input
               type="text"
               defaultValue={updateClass?.name}
-              {...register("name", { maxLength: 120 })}
+              {...register("name", { required: true, maxLength: 120 })}
               placeholder="Type here"
               className="input input-bordered w-full"
             />
@@ -79,7 +63,7 @@ const UpdateModal = ({ updateClass }) => {
             <input
               type="number"
               defaultValue={updateClass?.availableSeats}
-              {...register("seats", { maxLength: 10 })}
+              {...register("seats", { required: true, maxLength: 10 })}
               placeholder="Type here"
               className="input input-bordered w-full"
             />
@@ -92,26 +76,17 @@ const UpdateModal = ({ updateClass }) => {
             <input
               type="number"
               defaultValue={updateClass?.price}
-              {...register("price", { maxLength: 10 })}
+              {...register("price", { required: true, maxLength: 10 })}
               placeholder="Type here"
               className="input input-bordered w-full"
             />
           </div>
 
           <input
-            type="file"
-            defaultValue={updateClass?.image}
-            {...register("image", { maxLength: 120 })}
-            className="file-input file-input-bordered w-full max-w-xs"
+            type="submit"
+            value="Update Class"
+            className="bg-pink-800 mt-4 btn text-white"
           />
-
-          <div>
-            <input
-              type="submit"
-              value="Update Class"
-              className="bg-pink-800 mt-4 btn text-white"
-            />
-          </div>
         </form>
       </dialog>
     </div>
