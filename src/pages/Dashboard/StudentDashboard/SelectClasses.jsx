@@ -2,6 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle";
 import useSelect from "../../../hooks/useSelect";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectClasses = () => {
   const [selectedClass, refetch] = useSelect();
@@ -75,9 +76,11 @@ const SelectClasses = () => {
                 <td className="">{classes?.availableSeats}</td>
                 <td className="">${classes?.price}</td>
                 <td>
-                  <button className="p-3 rounded  uppercase bg-amber-400">
-                    pay
-                  </button>
+                  <Link to={`/dashboard/payment?classId=${classes._id}`}>
+                    <button className="p-3 rounded uppercase bg-amber-400">
+                      Pay
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button

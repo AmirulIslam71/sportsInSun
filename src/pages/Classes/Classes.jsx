@@ -43,7 +43,7 @@ const Classes = () => {
   const handleSelected = (singleClass) => {
     if (user) {
       const saveClass = {
-        classId: singleClass,
+        classId: singleClass._id,
         email: user.email,
         name: singleClass.name,
         availableSeats: singleClass.availableSeats,
