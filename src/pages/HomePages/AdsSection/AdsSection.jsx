@@ -2,12 +2,12 @@ import SectionTitle from "../../../components/SectionTitle";
 
 const AdsSection = () => {
   return (
-    <div>
+    <div className="container mx-auto">
       <SectionTitle
         heading={"push your limits forward"}
         subHeading={"why choose us?"}
       ></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6 px-2">
         <div className="card bg-green-100 shadow-xl">
           <figure className="px-10 pt-10">
             <img

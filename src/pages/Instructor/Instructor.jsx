@@ -30,61 +30,63 @@ const Instructor = () => {
           </div>
         </div>
       </Parallax>
-      <div className="bg-gradient-to-r from-black to-red-950 py-8 px-2">
-        <h5 className="text-orange-600 text-2xl uppercase">Our Team</h5>
-        <h2 className="text-white text-5xl uppercase">Train with Experts</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-          {instructors.map((instructor) => (
-            <div
-              key={instructor._id}
-              className="card card-compact w-96 text-white shadow-xl mb-6"
-            >
-              <figure>
-                <img
-                  src={instructor.image}
-                  className="w-full h-80"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body bg-slate-700 ">
-                <h2 className="card-title">
-                  <span className="font-bold">Instructor :</span>{" "}
-                  {instructor.name}
-                </h2>
-                <div className="space-y-2 text-lg">
-                  <p>
-                    <span className="font-semibold">Email :</span>{" "}
-                    {instructor.email}
-                  </p>
-                  <p>
-                    <span className="font-semibold">Student :</span>{" "}
-                    <span className="text-red-400 font-semibold">
-                      {instructor.student}
-                    </span>
-                  </p>
-                  <p>
-                    <span className="font-semibold">Number of Classes :</span>{" "}
-                    <span className="text-red-400 font-semibold">
-                      {instructor.numClassesTaken}
-                    </span>
-                  </p>
-                  <p>
-                    <span className="font-semibold">Name of Classes -</span>{" "}
-                    {instructor.classesTaken.map((classes, index) => (
-                      <li key={index} className="">
-                        {classes}
-                      </li>
-                    ))}
-                  </p>
-                </div>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">
-                    See Classes Details
-                  </button>
+      <div className="bg-gradient-to-r from-black to-red-950">
+        <div className=" container mx-auto py-8 px-2">
+          <h5 className="text-orange-600 text-2xl uppercase">Our Team</h5>
+          <h2 className="text-white text-5xl uppercase">Train with Experts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {instructors.map((instructor) => (
+              <div
+                key={instructor._id}
+                className="card card-compact w-96 text-white shadow-xl mb-6"
+              >
+                <figure>
+                  <img
+                    src={instructor.image}
+                    className="w-full h-80"
+                    alt="Shoes"
+                  />
+                </figure>
+                <div className="card-body bg-slate-700 ">
+                  <h2 className="card-title">
+                    <span className="font-bold">Instructor :</span>{" "}
+                    {instructor.name}
+                  </h2>
+                  <div className="space-y-2 text-lg">
+                    <p>
+                      <span className="font-semibold">Email :</span>{" "}
+                      {instructor.email}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Student :</span>{" "}
+                      <span className="text-red-400 font-semibold">
+                        {instructor.student}
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-semibold">Number of Classes :</span>{" "}
+                      <span className="text-red-400 font-semibold">
+                        {instructor.numClassesTaken}
+                      </span>
+                    </p>
+                    <p>
+                      <span className="font-semibold">Name of Classes -</span>{" "}
+                      {instructor.classesTaken.map((classes, index) => (
+                        <li key={index} className="">
+                          {classes}
+                        </li>
+                      ))}
+                    </p>
+                  </div>
+                  <div className="card-actions justify-end">
+                    <button className="btn btn-primary">
+                      See Classes Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

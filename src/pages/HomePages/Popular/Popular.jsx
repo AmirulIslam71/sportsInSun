@@ -18,11 +18,11 @@ const Popular = () => {
         subHeading={"Our Popular Classes"}
         heading={"WHAT WE CAN OFFER"}
       ></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 p-2 container mx-auto">
         {classes.map((singleClass) => (
           <div
             key={singleClass._id}
-            className="card card-compact w-96 text-white shadow-xl mb-6"
+            className="card card-compact text-white shadow-xl mb-6"
           >
             <figure>
               <img
@@ -71,7 +71,7 @@ const Popular = () => {
       </div>
       <div className="text-center mb-5">
         <Link to="/classes">
-          <button className="bg-emerald-600 text-white uppercase text-center p-2 rounded">
+          <button className="bg-emerald-600 text-white uppercase p-2 text-center rounded">
             See All Classes
           </button>
         </Link>

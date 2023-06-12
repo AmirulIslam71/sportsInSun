@@ -31,8 +31,8 @@ const Footer = () => {
             className="w-16 h-12 rounded"
           />
           <p>
-            ACME Industries Ltd. <br />
-            Providing reliable tech since 1992
+            Sport In Sun Ltd. <br />
+            Providing reliable tech since 2001
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">

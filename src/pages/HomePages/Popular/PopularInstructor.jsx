@@ -19,11 +19,11 @@ const PopularInstructor = () => {
         subHeading={"Our popular team"}
       ></SectionTitle>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 px-2 container mx-auto">
         {instructors.map((instructor) => (
           <div
             key={instructor._id}
-            className="card card-compact w-96 text-white shadow-xl mb-6"
+            className="card card-compact text-white shadow-xl mb-6"
           >
             <figure>
               <img src={instructor.image} className="w-full h-80" alt="Shoes" />
@@ -65,7 +65,7 @@ const PopularInstructor = () => {
       </div>
       <div className="text-center mb-5">
         <Link to="/instructor">
-          <button className="bg-emerald-600 text-white uppercase text-center p-2 rounded">
+          <button className="bg-emerald-600 text-white uppercase p-2 text-center rounded">
             See All instructors
           </button>
         </Link>
