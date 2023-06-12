@@ -117,23 +117,31 @@ const Classes = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 px-2 container mx-auto">
           {classes.map((singleClass) => (
             <div
-              key={singleClass._id}
-              className="card card-compact text-white shadow-xl mb-6"
+              key={singleClass?._id}
+              className={`card card-compact text-white shadow-xl mb-6 ${
+                singleClass?.availableSeats === 0 ? "bg-red-500" : ""
+              }`}
             >
               <figure>
                 <img
-                  src={singleClass.image}
+                  src={singleClass?.image}
                   className="w-full h-80"
                   alt="Shoes"
                 />
               </figure>
-              <div className="card-body bg-slate-700 ">
-                <h2 className="card-title">{singleClass.name}</h2>
+              <div
+                className={`card-body ${
+                  singleClass?.availableSeats === 0
+                    ? "bg-red-500"
+                    : "bg-slate-700"
+                }`}
+              >
+                <h2 className="card-title">{singleClass?.name}</h2>
                 <h2 className="card-title">
                   <span className="font-bold text-lime-400">
                     Instructor Name :
                   </span>{" "}
-                  {singleClass.instructorName}
+                  {singleClass?.instructorName}
                 </h2>
                 <div className="space-y-2 text-lg">
                   <p>
@@ -142,7 +150,7 @@ const Classes = () => {
                     </span>{" "}
                     <span className="text-red-400 font-semibold">
                       {" "}
-                      {singleClass.enrolled}
+                      {singleClass?.enrolled}
                     </span>
                   </p>
                   <p>
@@ -151,27 +159,33 @@ const Classes = () => {
                     </span>{" "}
                     <span className="text-red-400 font-semibold">
                       {" "}
-                      {singleClass.availableSeats}
+                      {singleClass?.availableSeats}
                     </span>
                   </p>
                   <p>
                     <span className="font-semibold text-lime-400">Price :</span>{" "}
                     <span className="text-red-400 font-semibold">
-                      $ {singleClass.price}
+                      $ {singleClass?.price}
                     </span>
                   </p>
                 </div>
-                <div className="card-actions justify-end">
+                <div
+                  style={{
+                    display:
+                      singleClass?.availableSeats === 0 ? "none" : "flex",
+                  }}
+                  className="card-actions justify-end"
+                >
                   <button
                     onClick={() => handleSelected(singleClass)}
                     className={`btn btn-primary ${
-                      selectedClassId.includes(singleClass._id)
+                      selectedClassId.includes(singleClass?._id)
                         ? "disabled"
                         : ""
                     }`}
-                    disabled={selectedClassId.includes(singleClass._id)}
+                    disabled={selectedClassId.includes(singleClass?._id)}
                   >
-                    {selectedClassId.includes(singleClass._id)
+                    {selectedClassId.includes(singleClass?._id)
                       ? "Class Selected"
                       : "Select Class"}
                   </button>

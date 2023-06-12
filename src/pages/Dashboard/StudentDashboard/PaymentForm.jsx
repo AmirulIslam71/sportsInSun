@@ -4,8 +4,10 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import "./PaymentForm.css";
+import useSelect from "../../../hooks/useSelect";
 
 const PaymentForm = ({ payClasses, price }) => {
+  const [, refetch] = useSelect();
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
@@ -60,7 +62,7 @@ const PaymentForm = ({ payClasses, price }) => {
     if (confirmError) {
       console.log(confirmError);
     }
-    console.log("payment intent", paymentIntent);
+
     setProcessing(false);
     if (paymentIntent && paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
@@ -82,13 +84,23 @@ const PaymentForm = ({ payClasses, price }) => {
           const { insertResult } = response.data;
 
           if (insertResult && insertResult.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Payment has been saved successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            axiosSecure
+              .patch(`/classes/${payClasses?.classId}`, null, {
+                params: { classId: payClasses?.classId },
+              })
+              .then((response) => {
+                const modified = response.data;
+                if (modified && modified.modifiedCount) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Payment has been saved successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  refetch();
+                }
+              });
           } else {
             Swal.fire({
               icon: "error",
@@ -110,7 +122,6 @@ const PaymentForm = ({ payClasses, price }) => {
 
   return (
     <div className="bg-slate-300 w-1/2 mx-auto mt-4 p-10">
-      <p>${price}</p>
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
@@ -128,6 +139,7 @@ const PaymentForm = ({ payClasses, price }) => {
             },
           }}
         />
+
         <button
           className="btn btn-sm mt-4 rounded"
           type="submit"

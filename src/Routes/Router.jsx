@@ -17,6 +17,7 @@ import AdminRoutes from "./AdmineRoutes";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
 import Payment from "../pages/Dashboard/StudentDashboard/Payment";
 import MyClass from "../pages/Dashboard/InstructorDashboard/MyClass";
+import PaymentHistory from "../pages/Dashboard/StudentDashboard/PaymentHistory";
 
 const Router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const Router = createBrowserRouter([
       {
         path: "payment",
         element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
 
       // admin dashboard

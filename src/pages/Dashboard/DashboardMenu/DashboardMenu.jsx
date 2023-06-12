@@ -138,14 +138,14 @@ const DashboardMenu = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/dashboard/payment"
+                    to="/dashboard/paymentHistory"
                     style={({ isActive }) => {
                       return {
                         color: isActive ? "green" : "",
                       };
                     }}
                   >
-                    <FaGoogleWallet></FaGoogleWallet> Payment
+                    <FaGoogleWallet></FaGoogleWallet> Payment History
                   </NavLink>
                 </li>
               </>

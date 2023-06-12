@@ -13,7 +13,7 @@ const Popular = () => {
   });
 
   return (
-    <div className="bg-black">
+    <div>
       <SectionTitle
         subHeading={"Our Popular Classes"}
         heading={"WHAT WE CAN OFFER"}
