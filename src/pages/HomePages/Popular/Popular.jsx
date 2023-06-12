@@ -7,7 +7,9 @@ const Popular = () => {
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/classes/popular");
+      const res = await axios.get(
+        "https://sports-in-sun-server.vercel.app/classes/popular"
+      );
       return res.data;
     },
   });

@@ -20,7 +20,7 @@ const AllClasses = () => {
   });
 
   const handleUpdate = (id, status) => {
-    fetch(`http://localhost:5000/classes/${status}/${id}`, {
+    fetch(`https://sports-in-sun-server.vercel.app/classes/${status}/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

@@ -26,17 +26,19 @@ const SocialLogin = () => {
               email,
               photo,
             };
-            axios.post("http://localhost:5000/users", saveUser).then((res) => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User Create with social site successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              }
-            });
+            axios
+              .post("https://sports-in-sun-server.vercel.app/users", saveUser)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Create with social site successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }
+              });
           })
           .catch((error) => {
             console.log(error);

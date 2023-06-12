@@ -20,7 +20,7 @@ const AllUsers = () => {
   const handleUpdate = (userId, role) => {
     setDisableButtons(true);
 
-    fetch(`http://localhost:5000/users/${role}/${userId}`, {
+    fetch(`https://sports-in-sun-server.vercel.app/users/${role}/${userId}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -54,7 +54,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${_id}`, {
+        fetch(`https://sports-in-sun-server.vercel.app/users/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

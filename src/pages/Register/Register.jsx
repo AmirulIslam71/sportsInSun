@@ -42,19 +42,21 @@ const Register = () => {
         const saveUser = { name, email, photo, gender, phone, address };
         updateUserProfile(name, photo)
           .then(() => {
-            axios.post("http://localhost:5000/users", saveUser).then((res) => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User Create successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                navigate(from, { replace: true });
-                reset();
-              }
-            });
+            axios
+              .post("https://sports-in-sun-server.vercel.app/users", saveUser)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Create successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate(from, { replace: true });
+                  reset();
+                }
+              });
           })
           .catch((error) => {
             console.log(error);

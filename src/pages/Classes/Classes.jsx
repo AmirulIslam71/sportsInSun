@@ -20,7 +20,7 @@ const Classes = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get("http://localhost:5000/selectedClass", {
+        .get("https://sports-in-sun-server.vercel.app/selectedClass", {
           params: { email: user.email },
         })
         .then((res) => {
@@ -45,7 +45,10 @@ const Classes = () => {
         instructorName: singleClass.instructorName,
       };
       axios
-        .post("http://localhost:5000/selectedClass", saveClass)
+        .post(
+          "https://sports-in-sun-server.vercel.app/selectedClass",
+          saveClass
+        )
         .then((res) => {
           if (res.data.insertedId) {
             refetch();
