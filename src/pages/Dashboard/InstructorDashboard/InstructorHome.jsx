@@ -4,6 +4,7 @@ import useProfile from "../../../hooks/useProfile";
 const InstructorHome = () => {
   const { user } = useAuth();
   const [profile] = useProfile();
+  console.log(profile);
   return (
     <div className="w-full h-full p-4">
       <h1 className="text-2xl lg:text-3xl">

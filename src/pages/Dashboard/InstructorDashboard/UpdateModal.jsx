@@ -21,7 +21,6 @@ const UpdateModal = ({ updateClass }) => {
     axiosSecure
       .put(`/classes/${updateClass._id}`, updatedClass)
       .then((data) => {
-        console.log(data);
         if (data.data.modifiedCount) {
           Swal.fire({
             position: "top-end",

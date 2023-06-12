@@ -1,4 +1,5 @@
 import SectionTitle from "../../../components/SectionTitle";
+import { Slide } from "react-awesome-reveal";
 
 const AdsSection = () => {
   return (
@@ -17,7 +18,9 @@ const AdsSection = () => {
             />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title">Modern Equipment</h2>
+            <Slide>
+              <h2 className="card-title">Modern Equipment</h2>
+            </Slide>
             <p className="text-xs opacity-90">
               Modern equipment revolutionizes industries and enhances
               productivity with advanced technologies, streamlining processes
@@ -34,7 +37,9 @@ const AdsSection = () => {
             />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title">Healthy nutrition plan</h2>
+            <Slide>
+              <h2 className="card-title">Healthy nutrition plan</h2>
+            </Slide>
             <p className="text-xs opacity-90">
               A healthy nutrition plan plays a crucial role in maintaining
               overall well-being, providing essential nutrients and promoting
@@ -51,7 +56,9 @@ const AdsSection = () => {
             />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title">Professional training plan </h2>
+            <Slide>
+              <h2 className="card-title">Professional training plan </h2>
+            </Slide>
             <p className="text-xs opacity-90">
               A professional training plan is a structured and comprehensive
               program designed to enhance skills, knowledge, and performance in
@@ -69,7 +76,9 @@ const AdsSection = () => {
             />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title">Unique to your needs</h2>
+            <Slide>
+              <h2 className="card-title">Unique to your needs</h2>
+            </Slide>
             <p className="text-xs opacity-90">
               Tailored to individual requirements, a unique approach ensures
               that solutions, products, or services are customized to meet

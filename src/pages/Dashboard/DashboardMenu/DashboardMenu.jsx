@@ -150,6 +150,18 @@ const DashboardMenu = () => {
                 </li>
                 <li>
                   <NavLink
+                    to="/dashboard/enrolledClass"
+                    style={({ isActive }) => {
+                      return {
+                        color: isActive ? "green" : "",
+                      };
+                    }}
+                  >
+                    <FaGoogleWallet></FaGoogleWallet> Enrolled Class
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/dashboard/paymentHistory"
                     style={({ isActive }) => {
                       return {
